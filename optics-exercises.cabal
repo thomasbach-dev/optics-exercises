@@ -1,0 +1,34 @@
+cabal-version:      3.0
+name:               optics-exercises
+version:            0.1.0.0
+synopsis:           Exercise from “Optics by Example”
+
+-- A longer description of the package.
+-- description:
+homepage:           https://github.com/thomasbach-dev/optics-exercises
+
+-- A URL where users can report bugs.
+-- bug-reports:
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Thomas Bach
+maintainer:         info@thomasbach.dev
+
+-- A copyright notice.
+-- copyright:
+category:           Data
+extra-source-files:
+    CHANGELOG.md
+    README.md
+
+library
+    exposed-modules:  MyLib
+
+    -- Modules included in this library but not exported.
+    -- other-modules:
+
+    -- LANGUAGE extensions used by modules in this package.
+    -- other-extensions:
+    build-depends:    base ^>=4.14.1.0
+    hs-source-dirs:   src
+    default-language: Haskell2010
