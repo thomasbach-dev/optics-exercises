@@ -1,6 +1,6 @@
 module Limitations where
 
-import           Control.Lens (Lens', lens)
+import Control.Lens (Lens', lens)
 
 -- | Can you write a `Lens'` which focuses the second element of a
 -- tuple if the provided `Bool` is `True` and the third element if
