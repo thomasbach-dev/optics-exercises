@@ -14,26 +14,37 @@ license-file:       LICENSE
 author:             Thomas Bach
 maintainer:         info@thomasbach.dev
 
--- A copyright notice.
--- copyright:
-category:           Data
+category:             Data
 extra-source-files:
     README.md
 
-library
-    exposed-modules:  Limitations
-
-    -- Modules included in this library but not exported.
-    -- other-modules:
-
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
-    build-depends:    base >=4.14 && <5
+common common-options
+  build-depends:      base
                     , aeson
                     , containers
                     , lens
                     , lens-aeson
                     , mtl
                     , text
-    hs-source-dirs:   src
-    default-language: Haskell2010
+  default-language:   Haskell2010
+  ghc-options:        -Wall
+                      -Wcompat
+                      -Wincomplete-record-updates
+                      -Wincomplete-uni-patterns
+                      -Wredundant-constraints
+
+library
+  import:             common-options
+  exposed-modules:    Limitations
+  hs-source-dirs:     src
+
+test-suite tests
+  import:             common-options                
+  type:               exitcode-stdio-1.0
+  main-is:            tests.hs
+  build-depends:      optics-exercises
+                    , genvalidity-property
+                    , hspec
+                    , validity
+  hs-source-dirs:     test
+  ghc-options:        -Wno-missing-home-modules
