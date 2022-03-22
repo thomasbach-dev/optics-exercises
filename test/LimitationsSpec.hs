@@ -9,9 +9,8 @@ import Limitations
 spec :: Spec
 spec = do
   describe "conditional" $ do
-    it "should get the right field" $ forAllValid $ \t@(x, y, z) ->
-      let expected :: Int
-          expected = if x then y else z
+    it "should get the right field" $ forAllValid $ \t@(x, y :: Int, z :: Int) ->
+      let expected = if x then y else z
       in view conditional t `shouldBe` expected
     it "should set the second field when True" $ forAllValid $ \(x, y, z) ->
       set conditional x (True, y, z) `shouldBe` (True, x, z :: Int)

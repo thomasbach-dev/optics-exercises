@@ -27,6 +27,7 @@ common common-options
                     , mtl
                     , text
   default-language:   Haskell2010
+  default-extensions: ScopedTypeVariables 
   ghc-options:        -Wall
                       -Wcompat
                       -Wincomplete-record-updates
