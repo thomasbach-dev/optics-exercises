@@ -1,4 +1,4 @@
-module LensLaws
+module LensProps
   ( checkLensLaws
   , checkSetGet
   , pSetGet

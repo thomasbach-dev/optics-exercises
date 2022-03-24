@@ -4,7 +4,7 @@ import Control.Lens           (set, view)
 import Test.Hspec             (Spec, describe, it, shouldBe)
 import Test.Validity.Property (forAllValid)
 
-import LensLaws
+import LensProps
 import Limitations
 
 spec :: Spec
