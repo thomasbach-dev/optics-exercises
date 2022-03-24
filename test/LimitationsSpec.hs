@@ -4,6 +4,7 @@ import Control.Lens           (set, view)
 import Test.Hspec             (Spec, describe, it, shouldBe)
 import Test.Validity.Property (forAllValid)
 
+import LensLaws
 import Limitations
 
 spec :: Spec
@@ -16,3 +17,5 @@ spec = do
       set conditional x (True, y, z) `shouldBe` (True, x, z :: Int)
     it "should set the third field when False" $ forAllValid $ \(x, y, z) ->
       set conditional x (False, y, z) `shouldBe` (False, y, x :: Int)
+
+    checkLensLaws @Int conditional
