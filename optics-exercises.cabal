@@ -38,7 +38,8 @@ common common-options
 
 library
   import:             common-options
-  exposed-modules:    Limitations
+  exposed-modules:    Laws
+                    , Limitations
   hs-source-dirs:     src
 
 test-suite tests
@@ -47,6 +48,7 @@ test-suite tests
   main-is:            tests.hs
   build-depends:      QuickCheck
                     , optics-exercises
+                    , genvalidity-hspec
                     , genvalidity-property
                     , hspec
                     , validity
