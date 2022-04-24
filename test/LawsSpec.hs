@@ -1,7 +1,9 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
 module LawsSpec (spec) where
 
+import Control.Lens        (view)
 import Test.Hspec          (Spec, describe, it)
+import Test.QuickCheck     (oneof)
 import Test.Validity       (GenValid (..), Validity (..))
 import Test.Validity.Utils (shouldFail)
 
@@ -33,6 +35,16 @@ instance GenValid Err where
        else ExitCode <$> genValid
   shrinkValid _ = []
 
+instance Validity Builder where
+  validate = mempty
+
+instance GenValid Builder where
+  genValid = do
+    _context <- genValid
+    _build <- oneof [pure concat]
+    pure Builder{..}
+  shrinkValid _ = []
+
 spec :: Spec
 spec = do
   describe "breaking the laws" $ do
@@ -58,3 +70,11 @@ spec = do
       shouldFail $ pGetSet msg2
     checkSetGet msg2
     checkSetSet msg2
+
+  describe "builderLens" $ do
+    let builderComp builder1 builder2 = view builderLens builder1 == view builderLens builder2
+    checkSetGet builderLens
+    it "satisfies set-set" $
+      genericPropGetSet builderComp builderLens
+    it "satisfies get-set" $
+      genericPropGetSet builderComp builderLens

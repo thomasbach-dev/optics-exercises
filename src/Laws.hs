@@ -9,6 +9,8 @@ module Laws
   , Err(..)
   , msg
   , msg2
+  , Builder(..)
+  , builderLens
   ) where
 
 import Control.Lens (Lens', lens)
@@ -62,3 +64,21 @@ msg2 = lens getMsg setMsg
     getMsg (ReallyBadError message) = message
     getMsg (ExitCode _)             = ""
     setMsg _ newMessage = ReallyBadError newMessage
+
+-- | Build a lawful lens for the following type
+data Builder = Builder { _context :: [String]
+                       , _build   :: [String] -> String
+                       }
+
+instance Show Builder where
+  show Builder{..} = "Builder { _context = "
+                     <> show _context
+                     <> ", _build = ([\"foo\", \"bar\"] -> "
+                     <> show (_build ["foo", "bar"])
+                     <> " )}"
+
+builderLens :: Lens' Builder String
+builderLens = lens getter setter
+  where
+    getter (Builder context build) = build context
+    setter (Builder _ build) s = Builder [s] build
