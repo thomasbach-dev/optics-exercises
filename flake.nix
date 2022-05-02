@@ -1,8 +1,8 @@
 {
   description = "Flake using Input Output HK infrastructure";
   inputs = {
-    haskellNix.url = "github:input-output-hk/haskell.nix/29433c04fa097b50be67c5b799eb7a87982cd900";
-    flake-utils.url = "github:numtide/flake-utils/3cecb5b042f7f209c56ffd8371b2711a290ec797";
+    haskellNix.url = "github:input-output-hk/haskell.nix/4ee7270856a6ba4617c7e51a6c619f365faad894";
+    flake-utils.url = "github:numtide/flake-utils/a4b154ebbdc88c8498a5c7b01589addc9e9cb678";
     nixpkgs.follows = "haskellNix/nixpkgs-unstable";
   };
   outputs = { self, nixpkgs, flake-utils, haskellNix }:
