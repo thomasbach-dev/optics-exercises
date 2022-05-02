@@ -2,6 +2,7 @@
 module LawsSpec (spec) where
 
 import Control.Lens        (view)
+import Data.List           (intercalate)
 import Test.Hspec          (Spec, describe, it)
 import Test.QuickCheck     (oneof)
 import Test.Validity       (GenValid (..), Validity (..))
@@ -41,7 +42,7 @@ instance Validity Builder where
 instance GenValid Builder where
   genValid = do
     _context <- genValid
-    _build <- oneof [pure concat]
+    _build <- oneof [pure concat, pure (intercalate ",")]
     pure Builder{..}
   shrinkValid _ = []
 
