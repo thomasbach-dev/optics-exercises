@@ -1,2 +1,4 @@
 # Cabal artifacts
 dist-newstyle/
+
+cabal.project.local*
