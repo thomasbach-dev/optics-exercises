@@ -2,9 +2,10 @@ module VirtualFieldsSpec
   ( spec
   ) where
 
+import Control.Lens          (set, view)
 import Data.GenValidity.Text ()
 import Data.Validity.Text    ()
-import Test.Hspec            (Spec, describe)
+import Test.Hspec            (Spec, describe, it, shouldBe)
 import Test.Validity         (GenValid, Validity)
 
 import LensProps
@@ -23,3 +24,10 @@ spec = do
     checkLensLaws username
   describe "email lens" $
     checkLensLaws email
+  describe "fullName" $ do
+    it "passes the example" $ do
+      let user = mkUser "John" "Cena" "invisible@example.com"
+      view fullName user `shouldBe` "John Cena"
+      set fullName "Docter of Thugonamics" user
+        `shouldBe` mkUser "Docter" "of Thugonamics" "invisible@example.com"
+    checkLensLaws fullName
